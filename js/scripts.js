@@ -25,18 +25,18 @@ let pokemonList = [
   }
 ];
 
-// Display the data on the page as an unordered list
-document.write('<ul class="pokemon-list">');
-for (let i = 0; i < pokemonList.length; i++) {
-  let currentPokemon = pokemonList[i];
-
+function displayPokemon (pokemon) {
   document.write(`
     <li class="pokemon-list__item">
-      ${currentPokemon.name} (height: <span>${currentPokemon.height}</span>)
+      ${pokemon.name} (height: <span>${pokemon.height}</span>)
   `);
-  if (currentPokemon.height > 0.4) {
+  if (pokemon.height > 0.4) {
     document.write(' - Wow, that\'s big!');
   }
   document.write('</li><br>');
 }
+
+// Display the data on the page as an unordered list
+document.write('<ul class="pokemon-list">');
+pokemonList.forEach(displayPokemon);
 document.write('</ul>');
