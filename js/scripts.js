@@ -49,11 +49,24 @@ let pokemonRepository = (function () {
       console.log("The item you are trying to add is not of the required type (object).")
     }
   }
+
+  function findPokemonByName(name) {
+    // Only matches if the search parameter is exactly (!) the name
+    let searchResult = pokemonList.filter( function(pokemon) {
+      return pokemon.name === name;
+    });
+    // Make sure that there is a search result and it is only one
+    if (searchResult && searchResult.length === 1) {
+      return searchResult[0];
+    } else {
+      console.log("The pokemon you have been searching for does not exist. (Or there is a typo in your search)");
+    }
   }
 
   return {
     getAll: getAll,
-    add: add
+    add: add,
+    findPokemonByName: findPokemonByName
   }
 })();
 
