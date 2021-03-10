@@ -1,29 +1,45 @@
-// Setting up a general dataset
-let pokemonList = [
-  {
-    name: 'Weedle',
-    height: 0.3,
-    types: [
-      'bug',
-      'poison'
-    ]
-  },
-  {
-    name: 'Pikachu',
-    height: 0.4,
-    types: [
-      'electric'
-    ]
-  },
-  {
-    name: 'Bellsprout',
-    height: 0.7,
-    types: [
-      'grass',
-      'poison'
-    ]
+// Setting up a general dataset in an IIFE
+let pokemonRepository = (function () {
+  let pokemonList = [
+    {
+      name: 'Weedle',
+      height: 0.3,
+      types: [
+        'bug',
+        'poison'
+      ]
+    },
+    {
+      name: 'Pikachu',
+      height: 0.4,
+      types: [
+        'electric'
+      ]
+    },
+    {
+      name: 'Bellsprout',
+      height: 0.7,
+      types: [
+        'grass',
+        'poison'
+      ]
+    }
+  ];
+
+  function getAll() {
+    return pokemonList;
   }
-];
+
+  function add(item) {
+    pokemonList.push(item);
+  }
+
+  return {
+    getAll: getAll,
+    add: add
+  }
+})();
+
 
 function displayPokemon (pokemon) {
   document.write(`
@@ -38,5 +54,5 @@ function displayPokemon (pokemon) {
 
 // Display the data on the page as an unordered list
 document.write('<ul class="pokemon-list">');
-pokemonList.forEach(displayPokemon);
+pokemonRepository.getAll().forEach(displayPokemon);
 document.write('</ul>');
