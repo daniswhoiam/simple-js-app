@@ -31,12 +31,43 @@ let pokemonRepository = (function () {
   }
 
   function add(item) {
-    pokemonList.push(item);
+    // Check first if the item is an object
+    if (typeof item === 'object') {
+      // Further check if the number and types of object keys are right
+      let rightKeys = ['name', 'height', 'types'];
+      let itemNumberOfKeys = Object.keys(item).length;
+      let itemHasRightKeys = rightKeys.every( function (key) {
+        return Object.keys(item).includes(key);
+      });
+
+      if (itemNumberOfKeys === 3 && itemHasRightKeys) {
+        pokemonList.push(item);
+      } else {
+        console.log("The item you are trying to add has an invalid number and/or invalid types of keys.")
+      }
+    } else {
+      console.log("The item you are trying to add is not of the required type (object).")
+    }
+  }
+
+  function findPokemonByName(name) {
+    // Only matches if the search parameter is exactly (!) the name
+    let searchResult = pokemonList.filter( function(pokemon) {
+      return pokemon.name === name;
+    });
+    // Make sure that there is a search result and it is only one
+    if (searchResult && searchResult.length === 1) {
+      return searchResult[0];
+    } else {
+      console.log("The pokemon you have been searching for does not exist. (Or there is a typo in your search)");
+      return {};
+    }
   }
 
   return {
     getAll: getAll,
-    add: add
+    add: add,
+    findPokemonByName: findPokemonByName
   }
 })();
 
