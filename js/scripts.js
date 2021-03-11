@@ -60,6 +60,7 @@ let pokemonRepository = (function () {
       return searchResult[0];
     } else {
       console.log("The pokemon you have been searching for does not exist. (Or there is a typo in your search)");
+      return {};
     }
   }
 
