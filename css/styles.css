@@ -70,6 +70,24 @@ h1 {
 .pokemon-list__item {
   font-family: var(--secondary-font);
   font-size: 28px;
+  display: block;
+  width: 100%;
+  padding: 20px 10px;
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 40px;
+  cursor: pointer;
+  border: 2px solid var(--primary-color);
+  border-radius: 2px;
+  outline: none;
+}
+
+.pokemon-list__item:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.pokemon-list__item:active {
+  border: 2px solid var(--secondary-color);
 }
 
 .page-footer {
