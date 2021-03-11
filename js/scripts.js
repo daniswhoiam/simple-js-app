@@ -64,26 +64,61 @@ let pokemonRepository = (function () {
     }
   }
 
+  function addListItem(pokemon) {
+    let list = document.querySelector('.pokemon-list');
+
+    // Creating main elements
+    let listItem = document.createElement('li');
+    listItem.setAttribute('role', 'listitem');
+
+    let button = document.createElement('button');
+    button.classList.add('pokemon-list__item');
+
+    let span = document.createElement('span');
+
+    // Setting the content of the button
+    span.innerText = pokemon.height;
+    button.innerText = `${pokemon.name} (height: `;
+    button.appendChild(span);
+    let textEnding = document.createTextNode(")");
+    if (pokemon.height > 0.4) {
+      textEnding.nodeValue += ' - Wow, that\'s big!';
+    }
+    button.appendChild(textEnding);
+
+    /*
+    Alternative solution to get <span> to work:
+
+    let pattern = /\d+\.\d/i;
+    let result = pattern.exec(button.innerHTML)[0];
+    button.innerHTML = button.innerHTML.replace(result, `<span>${result}</span>`);
+    */
+
+    // Stick everything together
+    list.appendChild(listItem);
+    listItem.appendChild(button);
+
+    // Add Event Handler
+    handleEvents(button, pokemon);
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
+  function handleEvents(element, pokemon) {
+    element.addEventListener('click', function () {
+      showDetails(pokemon);
+    })
+  }
+
   return {
     getAll: getAll,
     add: add,
-    findPokemonByName: findPokemonByName
+    findPokemonByName: findPokemonByName,
+    addListItem: addListItem
   }
 })();
 
-
-function displayPokemon (pokemon) {
-  document.write(`
-    <li class="pokemon-list__item">
-      ${pokemon.name} (height: <span>${pokemon.height}</span>)
-  `);
-  if (pokemon.height > 0.4) {
-    document.write(' - Wow, that\'s big!');
-  }
-  document.write('</li><br>');
-}
-
-// Display the data on the page as an unordered list
-document.write('<ul class="pokemon-list">');
-pokemonRepository.getAll().forEach(displayPokemon);
-document.write('</ul>');
+// Add the data for each pokemon to the unordered list
+pokemonRepository.getAll().forEach(pokemonRepository.addListItem);
