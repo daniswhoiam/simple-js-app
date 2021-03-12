@@ -1,30 +1,7 @@
 // Setting up a general dataset in an IIFE
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      name: 'Weedle',
-      height: 0.3,
-      types: [
-        'bug',
-        'poison'
-      ]
-    },
-    {
-      name: 'Pikachu',
-      height: 0.4,
-      types: [
-        'electric'
-      ]
-    },
-    {
-      name: 'Bellsprout',
-      height: 0.7,
-      types: [
-        'grass',
-        'poison'
-      ]
-    }
-  ];
+  let pokemonList = [];
+  let apiURL = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function getAll() {
     return pokemonList;
@@ -34,13 +11,13 @@ let pokemonRepository = (function () {
     // Check first if the item is an object
     if (typeof item === 'object') {
       // Further check if the number and types of object keys are right
-      let rightKeys = ['name', 'height', 'types'];
+      let rightKeys = ['name', 'height', 'types', 'detailsUrl'];
       let itemNumberOfKeys = Object.keys(item).length;
-      let itemHasRightKeys = rightKeys.every( function (key) {
-        return Object.keys(item).includes(key);
-      });
+      let itemHasRightKeys = Object.keys(item).every( function (key) {
+        return rightKeys.includes(key);
+      })
 
-      if (itemNumberOfKeys === 3 && itemHasRightKeys) {
+      if (itemNumberOfKeys <= rightKeys.length && itemHasRightKeys) {
         pokemonList.push(item);
       } else {
         console.log("The item you are trying to add has an invalid number and/or invalid types of keys.")
@@ -112,13 +89,35 @@ let pokemonRepository = (function () {
     })
   }
 
+  function loadList() {
+    return fetch(apiURL).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
+
   return {
     getAll: getAll,
     add: add,
     findPokemonByName: findPokemonByName,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList
   }
 })();
 
-// Add the data for each pokemon to the unordered list
-pokemonRepository.getAll().forEach(pokemonRepository.addListItem);
+// Load data and display it in list
+pokemonRepository.loadList().then(function() {
+  // Now the data is loaded!
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
+});
