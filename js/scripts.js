@@ -50,11 +50,17 @@ let pokemonRepository = (function () {
 
     let button = document.createElement('button');
     button.classList.add('pokemon-list__item');
+    button.setAttribute('id', pokemon.name);
 
     let span = document.createElement('span');
+    span.classList.add('pokemon-height');
 
     // Setting the content of the button
-    span.innerText = pokemon.height;
+    if (pokemon.height) {
+      span.innerText = pokemon.height;
+    } else {
+      span.innerText = 'Click to find out!';
+    }
     button.innerText = `${pokemon.name} (height: `;
     button.appendChild(span);
     let textEnding = document.createTextNode(")");
@@ -62,14 +68,6 @@ let pokemonRepository = (function () {
       textEnding.nodeValue += ' - Wow, that\'s big!';
     }
     button.appendChild(textEnding);
-
-    /*
-    Alternative solution to get <span> to work:
-
-    let pattern = /\d+\.\d/i;
-    let result = pattern.exec(button.innerHTML)[0];
-    button.innerHTML = button.innerHTML.replace(result, `<span>${result}</span>`);
-    */
 
     // Stick everything together
     list.appendChild(listItem);
@@ -82,6 +80,9 @@ let pokemonRepository = (function () {
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
       console.log(pokemon);
+      let pokemonButton = document.querySelector(`#${pokemon.name}`);
+      let span = pokemonButton.querySelector('span');
+      span.innerText = pokemon.height / 10;
     });
   }
 

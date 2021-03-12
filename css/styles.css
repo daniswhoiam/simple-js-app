@@ -69,7 +69,7 @@ h1 {
 
 .pokemon-list__item {
   font-family: var(--secondary-font);
-  font-size: 28px;
+  font-size: 22px;
   display: block;
   width: 100%;
   padding: 20px 10px;
@@ -104,6 +104,10 @@ h1 {
   .page-header {
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .pokemon-list__item {
+    font-size: 28px;
   }
 }
 
