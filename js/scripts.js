@@ -108,13 +108,19 @@ let pokemonRepository = (function () {
     });
   }
 
+  function getIndex(pokemon) {
+    return pokemonList.indexOf(pokemon);
+  }
+
   return {
     getAll: getAll,
     add: add,
     findPokemonByName: findPokemonByName,
     addListItem: addListItem,
     loadList: loadList,
-    loadDetails: loadDetails
+    loadDetails: loadDetails,
+    showDetails: showDetails,
+    getIndex: getIndex
   };
 })();
 
@@ -122,10 +128,18 @@ let modal = (function () {
   // Elements that are not specific to a pokemon
   let modalContainer = document.querySelector('.modal-container');
   let modalWindow = document.querySelector('.modal');
-  let modalCloseButton = document.querySelector('.modal__close-button');
+  let modalCloseButton = document.querySelector('.modal__button.close-button');
+  let modalContentWrapper = document.querySelector('.modal__content');
+  let modalPreviousButton = document.querySelector('.modal__button.previous-button');
+  let modalNextButton = document.querySelector('.modal__button.next-button');
+
+  let currentPokemon;
 
   // Makes modal visible and adds all pokemon-specific elements
   function showModal (pokemon) {
+    currentPokemon = pokemon;
+    improveNavigation(pokemon);
+
     let modalTitle = document.createElement('h1');
     modalTitle.classList.add('modal__title');
     modalTitle.innerText = pokemon.name;
@@ -140,11 +154,27 @@ let modal = (function () {
     modalPicture.classList.add('modal__image');
     modalPicture.setAttribute('src', pokemon.imageUrl);
 
-    modalWindow.appendChild(modalTitle);
-    modalWindow.appendChild(modalProperties);
-    modalWindow.appendChild(modalPicture);
+    modalContentWrapper.appendChild(modalTitle);
+    modalContentWrapper.appendChild(modalProperties);
+    modalContentWrapper.appendChild(modalPicture);
 
     modalContainer.classList.add('is-visible');
+  }
+
+  // Removes non-functioning navigation on first and last pokemon
+  function improveNavigation(pokemon) {
+    let indexOfCurrentPokemon = pokemonRepository.getIndex(pokemon);
+    if (indexOfCurrentPokemon === 0) {
+      modalPreviousButton.style.visibility = 'hidden';
+    } else if (indexOfCurrentPokemon === (pokemonRepository.getAll().length - 1)) {
+      modalNextButton.style.visibility = 'hidden';
+    } else {
+      [modalPreviousButton, modalNextButton].forEach(function (button) {
+        if (button.hasAttribute('style')) {
+          button.removeAttribute('style');
+        }
+      });
+    }
   }
 
   // Adds all pokemon text properties, own function for greater flexibility
@@ -167,18 +197,35 @@ let modal = (function () {
 
   // Closes modal and removes all parts that are pokemon-specific
   function closeModal() {
-    // Remove children dynamically in order to avoid double code
-    let modalChildren = modalWindow.querySelectorAll('.modal > *');
-    modalChildren.forEach(function (child) {
-      if (!child.classList.contains('modal__close-button')) {
-        modalWindow.removeChild(child);
-      }
-    });
-
+    removeModalContent();
+    currentPokemon = null;
     modalContainer.classList.remove('is-visible');
   }
 
-  // Closing modal via Esc-button or by clicking outside of modal
+  function removeModalContent() {
+    // Remove children dynamically in order to avoid double code
+    let modalChildren = modalContentWrapper.querySelectorAll('.modal__content > *');
+    modalChildren.forEach(function (child) {
+      modalContentWrapper.removeChild(child);
+    });
+  }
+
+  // Enables navigation between pokemon
+  function navigateModal(e) {
+    let currentPosition = pokemonRepository.getIndex(currentPokemon);
+    let newPokemon;
+    if (e.target === modalPreviousButton) {
+      newPokemon = pokemonRepository.getAll()[currentPosition - 1];
+    } else if (e.target === modalNextButton) {
+      newPokemon = pokemonRepository.getAll()[currentPosition + 1];
+    }
+    if (newPokemon) {
+      removeModalContent();
+      pokemonRepository.showDetails(newPokemon);
+    }
+  }
+
+  // Closing modal via Close-button, Esc-key or by clicking outside of modal
   modalCloseButton.addEventListener('click', closeModal);
   window.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
@@ -189,6 +236,11 @@ let modal = (function () {
     if (e.target === modalContainer) {
       closeModal();
     }
+  });
+
+  // Event listeners for navigation
+  [modalPreviousButton, modalNextButton].forEach(function (button) {
+    button.addEventListener('click', navigateModal);
   });
 
   return {
