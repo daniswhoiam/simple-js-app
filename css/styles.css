@@ -7,6 +7,7 @@
   --background-color: #f9f9f9;
   --primary-color: #f7c601;
   --secondary-color: #f701de;
+  --secondary-color-darker20: #c400ab;
   --tertiary-color: #1a01f7;
 
   /* Fonts */
@@ -60,6 +61,80 @@ h1 {
   border-radius: 2px;
   border: 4px solid var(--secondary-color);
 }
+
+/* Modal styling start */
+
+.modal-container {
+  display: none;
+}
+
+.modal-container.is-visible {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: grid;
+  text-align: center;
+}
+
+.modal {
+  margin: auto;
+  background-color: #fff;
+  text-align: left;
+  min-width: 300px;
+  max-width: 700px;
+  padding: 20px;
+  border-radius: 2px;
+}
+
+.modal__close-button {
+  display: inline-block;
+  float: right;
+  font-size: 70px;
+  margin: 0;
+  padding: 0 0 5px 0;
+  line-height: 20px;
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modal__title {
+  font-family: var(--secondary-font);
+}
+
+.modal-property:first-child {
+  font-family: var(--secondary-font);
+}
+
+ul.modal-property {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.modal-property__type {
+  background-color: var(--secondary-color-darker20);
+  border-radius: 2px;
+  margin-right: 10px;
+  padding: 4px 6px;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.modal__image {
+  margin: 0 auto;
+  width: 100%;
+  display: block;
+}
+
+/* Modal styling end */
 
 .pokemon-list {
   list-style-type: none;
@@ -123,6 +198,14 @@ h1 {
 
   .page-header a {
     margin: 0;
+  }
+
+  .modal {
+    min-width: 500px;
+  }
+
+  .modal__image {
+    max-width: 260px;
   }
 }
 
