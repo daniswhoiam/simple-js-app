@@ -46,10 +46,11 @@ let pokemonRepository = (function () {
 
     // Creating main elements
     let listItem = document.createElement('li');
+    listItem.classList.add('group-list-item');
     listItem.setAttribute('role', 'listitem');
 
     let button = document.createElement('button');
-    button.classList.add('pokemon-list__item');
+    button.classList.add('btn', 'pokemon-list__item');
     button.setAttribute('id', pokemon.name);
 
     // Setting the content of the button
