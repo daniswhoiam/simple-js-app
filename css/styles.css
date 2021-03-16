@@ -23,10 +23,17 @@ html {
 body {
   font-family: var(--primary-font);
   padding: 20px;
+  background: none;
 }
 
 a {
   color: var(--tertiary-color);
+}
+
+button,
+button:active,
+button:focus {
+  outline: none;
 }
 
 span {
@@ -88,6 +95,12 @@ h1 {
   max-width: 700px;
   padding: 20px;
   border-radius: 2px;
+
+  /* Overwrite Bootstrap CSS */
+  position: static;
+  display: block;
+  width: auto;
+  height: auto;
 }
 
 .modal__button {

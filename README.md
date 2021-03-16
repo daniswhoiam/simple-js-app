@@ -14,3 +14,8 @@ The project will use
 * HTML5
 * CSS3
 * JavaScript (ES6+)
+* jQuery 3.3.1
+* Popper 1.14.7
+* Bootstrap 4.3.1
+* Promise Polyfill (by taylorhakes)
+* Fetch Polyfill (by GitHub)
