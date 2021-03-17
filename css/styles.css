@@ -30,10 +30,11 @@ a {
   color: var(--tertiary-color);
 }
 
-button,
-button:active,
-button:focus {
+.btn,
+.btn:active,
+.btn:focus {
   outline: none;
+  box-shadow: none;
 }
 
 span {
@@ -71,11 +72,11 @@ h1 {
 
 /* Modal styling start */
 
-.modal-container {
+.modal {
   display: none;
 }
 
-.modal-container.is-visible {
+.modal.is-visible {
   position: fixed;
   top: 0;
   left: 0;
@@ -87,7 +88,7 @@ h1 {
   text-align: center;
 }
 
-.modal {
+.modal-dialog {
   margin: auto;
   background-color: #fff;
   text-align: left;
@@ -103,6 +104,13 @@ h1 {
   height: auto;
 }
 
+.modal-content,
+.modal-header,
+.modal-body,
+.modal-footer {
+  border: none;
+}
+
 .modal__button {
   background: none;
   outline: none;
@@ -111,15 +119,16 @@ h1 {
 }
 
 .modal__button.close-button {
-  display: inline-block;
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
   font-size: 70px;
   margin: 0;
   padding: 0 0 5px 0;
   line-height: 20px;
 }
 
-.modal__navigation {
+.modal-footer {
   display: flex;
   justify-content: space-between;
 }
@@ -226,7 +235,7 @@ ul.modal-property {
     margin: 0;
   }
 
-  .modal {
+  .modal-dialog {
     min-width: 500px;
   }
 

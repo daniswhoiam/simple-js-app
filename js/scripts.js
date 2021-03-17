@@ -127,10 +127,11 @@ let pokemonRepository = (function () {
 
 let modal = (function () {
   // Elements that are not specific to a pokemon
-  let modalContainer = document.querySelector('.modal-container');
-  let modalWindow = document.querySelector('.modal');
+  let modalContainer = document.querySelector('.modal');
+  let modalWindow = document.querySelector('.modal-dialog');
+  let modalHeader = document.querySelector('.modal-header');
   let modalCloseButton = document.querySelector('.modal__button.close-button');
-  let modalContentWrapper = document.querySelector('.modal__content');
+  let modalContentWrapper = document.querySelector('.modal-body');
   let modalPreviousButton = document.querySelector('.modal__button.previous-button');
   let modalNextButton = document.querySelector('.modal__button.next-button');
 
@@ -155,7 +156,7 @@ let modal = (function () {
     modalPicture.classList.add('modal__image');
     modalPicture.setAttribute('src', pokemon.imageUrl);
 
-    modalContentWrapper.appendChild(modalTitle);
+    modalHeader.appendChild(modalTitle);
     modalContentWrapper.appendChild(modalProperties);
     modalContentWrapper.appendChild(modalPicture);
 
@@ -205,10 +206,11 @@ let modal = (function () {
 
   function removeModalContent() {
     // Remove children dynamically in order to avoid double code
-    let modalChildren = modalContentWrapper.querySelectorAll('.modal__content > *');
+    let modalChildren = modalContentWrapper.querySelectorAll('.modal-body > *');
     modalChildren.forEach(function (child) {
       modalContentWrapper.removeChild(child);
     });
+    modalHeader.removeChild(modalContainer.querySelector('h1'));
   }
 
   // Enables navigation between pokemon

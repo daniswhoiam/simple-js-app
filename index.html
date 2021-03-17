@@ -20,13 +20,17 @@
       </a>
     </header>
     <ul class="list-group pokemon-list" role="list"></ul>
-    <div class="modal-container">
-      <div class="modal">
-        <button class="btn modal__button close-button">&times;</button>
-        <div class="modal__content"></div>
-        <div class="modal__navigation">
-          <button class="btn modal__button previous-button">&#10094;</button>
-          <button class="btn modal__button next-button">&#10095;</button>
+    <div class="modal" tabindex="-1" aria-labelledby="Pokemon Detail View" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn modal__button close-button btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button class="btn modal__button previous-button">&#10094;</button>
+            <button class="btn modal__button next-button">&#10095;</button>
+          </div>
         </div>
       </div>
     </div>
