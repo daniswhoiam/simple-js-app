@@ -22,7 +22,7 @@ html {
 
 body {
   font-family: var(--primary-font);
-  padding: 20px;
+  padding: 10px;
   background: none;
 }
 
@@ -35,10 +35,6 @@ a {
 .btn:focus {
   outline: none;
   box-shadow: none;
-}
-
-span {
-  color: var(--secondary-color);
 }
 
 h1 {
@@ -141,11 +137,6 @@ input.form-control:focus {
 .modal-footer {
   display: flex;
   justify-content: space-between;
-}
-
-.modal__button.previous-button,
-.modal__button.next-button {
-  position: static;
 }
 
 .modal__title {

@@ -13,9 +13,10 @@ The project will be live and publicly available as a web application using a bro
 The project will use
 * HTML5
 * CSS3
-* JavaScript (ES6+)
+* JavaScript (ES5+)
 * jQuery 3.3.1
 * Popper 1.14.7
 * Bootstrap 4.3.1
+* Mark.js for jQuery 8.11.1
 * Promise Polyfill (by taylorhakes)
 * Fetch Polyfill (by GitHub)
