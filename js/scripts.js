@@ -258,3 +258,30 @@ pokemonRepository.loadList().then(function() {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+// Search functionality in navbar
+$('#search-form').submit(function() {
+  // Get the search term
+  let searchTerm = $('#search-term').val();
+
+  // Filter all pokemon that include search term
+  let results = pokemonRepository.getAll().filter(function (pokemon) {
+    return pokemon.name.includes(searchTerm);
+  });
+
+  // Clear list of pokemon
+  $('.pokemon-list').empty();
+
+  // Add all pokemon from results
+  results.forEach(function (result) {
+    pokemonRepository.addListItem(result);
+  });
+
+  // Mark search term in results
+  $('.pokemon-list__item').each( function () {
+    $(this).mark(searchTerm);
+  });
+
+  // Prevent default submit behavior
+  return false;
+});

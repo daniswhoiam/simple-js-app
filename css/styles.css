@@ -47,22 +47,60 @@ h1 {
   margin: 0;
 }
 
-.page-header {
+mark {
+  background: var(--secondary-color-darker20);
+  color: var(--primary-color);
+}
+
+input.form-control:focus {
+  box-shadow: 0 0 2px 2px var(--tertiary-color);
+  border-color: var(--tertiary-color);
+}
+
+.navbar {
+  background-color: #fff;
+  border: 2px solid var(--primary-color);
+  border-radius: 2px;
+}
+
+.navbar p,
+.navbar .form-control,
+.navbar button {
+  font-size: 30px;
+}
+
+.btn-outline-success {
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-outline-success:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.navbar-light .navbar-toggler,
+.navbar-light .navbar-toggler:focus {
+  border: none;
+  outline: none;
+}
+
+.page-hero {
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
 }
 
-.page-header p {
+.page-hero p {
   font-size: 28px;
   margin: 0 0 40px 0;
 }
 
-.page-header a {
+.page-hero a {
   margin: 0 auto;
 }
 
-.page-header a img {
+.page-hero a img {
   width: 100%;
   max-width: 300px;
   cursor: pointer;
@@ -183,7 +221,7 @@ ul.modal-property {
 
 /* Medium devices */
 @media all and (min-width: 768px) {
-  .page-header {
+  .page-hero {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -199,11 +237,11 @@ ul.modal-property {
     font-size: 72px;
   }
 
-  .page-header p {
+  .page-hero p {
     font-size: 42px;
   }
 
-  .page-header a {
+  .page-hero a {
     margin: 0;
   }
 

@@ -10,15 +10,29 @@
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
-    <header class="page-header">
-      <div class="page-header__item">
-        <h1 class="page-header__item">Look at all those chickens!</h1>
-        <p class="page-header__item">(Actually they're pokemon)</p>
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-light mb-4">
+        <i class="navbar-brand font-weight-bold">My Pokemon-List JS Project</i>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <form id="search-form" class="form-inline my-2 my-lg-0 flex-nowrap">
+            <input id="search-term" class="form-control mr-2" type="search" aria-label="Search">
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="page-hero">
+      <div class="page-hero__item">
+        <h1 class="page-hero__item">Look at all those chickens!</h1>
+        <p class="page-hero__item">(Actually they're pokemon)</p>
       </div>
-      <a class="page-header__item" href="https://youtu.be/F-X4SLhorvw?t=23" target="_blank" aria-label="Link to a video that explains the heading">
+      <a class="page-hero__item" href="https://youtu.be/F-X4SLhorvw?t=23" target="_blank" aria-label="Link to a video that explains the heading">
         <img src="https://memegenerator.net/img/images/400x/12111893.jpg" alt="A screenshot of the video that explains the heading">
       </a>
-    </header>
+    </div>
     <ul class="list-group pokemon-list" role="list"></ul>
     <div class="modal fade" id="pokemon-modal" role="dialog" tabindex="-1" aria-labelledby="Pokemon Detail View" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -47,6 +61,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
     <script src="js/tota11y.min.js"></script>
   </body>
