@@ -72,36 +72,8 @@ h1 {
 
 /* Modal styling start */
 
-.modal {
-  display: none;
-}
-
-.modal.is-visible {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 999;
-  display: grid;
-  text-align: center;
-}
-
 .modal-dialog {
-  margin: auto;
-  background-color: #fff;
   text-align: left;
-  min-width: 300px;
-  max-width: 700px;
-  padding: 20px;
-  border-radius: 2px;
-
-  /* Overwrite Bootstrap CSS */
-  position: static;
-  display: block;
-  width: auto;
-  height: auto;
 }
 
 .modal-content,
@@ -120,8 +92,8 @@ h1 {
 
 .modal__button.close-button {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 20px;
+  right: 20px;
   font-size: 70px;
   margin: 0;
   padding: 0 0 5px 0;

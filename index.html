@@ -20,11 +20,11 @@
       </a>
     </header>
     <ul class="list-group pokemon-list" role="list"></ul>
-    <div class="modal" tabindex="-1" aria-labelledby="Pokemon Detail View" aria-hidden="true">
-      <div class="modal-dialog">
+    <div class="modal fade" id="pokemon-modal" role="dialog" tabindex="-1" aria-labelledby="Pokemon Detail View" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="btn modal__button close-button btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+            <button type="button" class="btn modal__button close-button close" data-dismiss="modal" aria-label="Close">&times;</button>
           </div>
           <div class="modal-body"></div>
           <div class="modal-footer">

@@ -52,6 +52,8 @@ let pokemonRepository = (function () {
     let button = document.createElement('button');
     button.classList.add('btn', 'pokemon-list__item');
     button.setAttribute('id', pokemon.name);
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#pokemon-modal');
 
     // Setting the content of the button
     button.innerText = `${pokemon.name}`;
@@ -159,8 +161,6 @@ let modal = (function () {
     modalHeader.appendChild(modalTitle);
     modalContentWrapper.appendChild(modalProperties);
     modalContentWrapper.appendChild(modalPicture);
-
-    modalContainer.classList.add('is-visible');
   }
 
   // Removes non-functioning navigation on first and last pokemon
@@ -201,7 +201,6 @@ let modal = (function () {
   function closeModal() {
     removeModalContent();
     currentPokemon = null;
-    modalContainer.classList.remove('is-visible');
   }
 
   function removeModalContent() {
