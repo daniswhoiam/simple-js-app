@@ -22,15 +22,19 @@ html {
 
 body {
   font-family: var(--primary-font);
-  padding: 20px;
+  padding: 10px;
+  background: none;
 }
 
 a {
   color: var(--tertiary-color);
 }
 
-span {
-  color: var(--secondary-color);
+.btn,
+.btn:active,
+.btn:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 h1 {
@@ -39,22 +43,60 @@ h1 {
   margin: 0;
 }
 
-.page-header {
+mark {
+  background: var(--secondary-color-darker20);
+  color: var(--primary-color);
+}
+
+input.form-control:focus {
+  box-shadow: 0 0 2px 2px var(--tertiary-color);
+  border-color: var(--tertiary-color);
+}
+
+.navbar {
+  background-color: #fff;
+  border: 2px solid var(--primary-color);
+  border-radius: 2px;
+}
+
+.navbar p,
+.navbar .form-control,
+.navbar button {
+  font-size: 30px;
+}
+
+.btn-outline-success {
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-outline-success:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.navbar-light .navbar-toggler,
+.navbar-light .navbar-toggler:focus {
+  border: none;
+  outline: none;
+}
+
+.page-hero {
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
 }
 
-.page-header p {
+.page-hero p {
   font-size: 28px;
   margin: 0 0 40px 0;
 }
 
-.page-header a {
+.page-hero a {
   margin: 0 auto;
 }
 
-.page-header a img {
+.page-hero a img {
   width: 100%;
   max-width: 300px;
   cursor: pointer;
@@ -64,30 +106,15 @@ h1 {
 
 /* Modal styling start */
 
-.modal-container {
-  display: none;
-}
-
-.modal-container.is-visible {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 999;
-  display: grid;
-  text-align: center;
-}
-
-.modal {
-  margin: auto;
-  background-color: #fff;
+.modal-dialog {
   text-align: left;
-  min-width: 300px;
-  max-width: 700px;
-  padding: 20px;
-  border-radius: 2px;
+}
+
+.modal-content,
+.modal-header,
+.modal-body,
+.modal-footer {
+  border: none;
 }
 
 .modal__button {
@@ -98,22 +125,18 @@ h1 {
 }
 
 .modal__button.close-button {
-  display: inline-block;
-  float: right;
+  position: absolute;
+  top: 20px;
+  right: 20px;
   font-size: 70px;
   margin: 0;
   padding: 0 0 5px 0;
   line-height: 20px;
 }
 
-.modal__navigation {
+.modal-footer {
   display: flex;
   justify-content: space-between;
-}
-
-.modal__button.previous-button,
-.modal__button.next-button {
-  position: static;
 }
 
 .modal__title {
@@ -189,7 +212,7 @@ ul.modal-property {
 
 /* Medium devices */
 @media all and (min-width: 768px) {
-  .page-header {
+  .page-hero {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -205,15 +228,15 @@ ul.modal-property {
     font-size: 72px;
   }
 
-  .page-header p {
+  .page-hero p {
     font-size: 42px;
   }
 
-  .page-header a {
+  .page-hero a {
     margin: 0;
   }
 
-  .modal {
+  .modal-dialog {
     min-width: 500px;
   }
 
