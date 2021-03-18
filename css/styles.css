@@ -24,6 +24,9 @@ body {
   font-family: var(--primary-font);
   padding: 10px;
   background: none;
+  min-width: 400px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 a {
@@ -242,13 +245,5 @@ ul.modal-property {
 
   .modal__image {
     max-width: 260px;
-  }
-}
-
-/* Extra large devices */
-@media all and (min-width: 1200px) {
-  body {
-    max-width: 1200px;
-    margin: 0 auto;
   }
 }
