@@ -1,4 +1,4 @@
-const modal = (function () {
+const modal = (function() {
   // Elements that are not specific to a pokemon
   const modalContainer = $('.modal');
   const modalContentWrapper = $('.modal-body');
@@ -8,7 +8,7 @@ const modal = (function () {
   let currentPokemon;
 
   // Makes modal visible and adds all pokemon-specific elements
-  function showModal (pokemon) {
+  function showModal(pokemon) {
     currentPokemon = pokemon;
     improveNavigation(pokemon);
 
@@ -18,7 +18,7 @@ const modal = (function () {
 
     const modalProperties = $('<div></div>');
     modalProperties.addClass('modal__properties');
-    addModalProperties(pokemon).forEach(function (property) {
+    addModalProperties(pokemon).forEach(function(property) {
       modalProperties.append(property);
     });
 
@@ -36,10 +36,13 @@ const modal = (function () {
     const indexOfCurrentPokemon = pokemonRepository.getIndex(pokemon);
     if (indexOfCurrentPokemon === 0) {
       modalPreviousButton.css('visibility', 'hidden');
-    } else if (indexOfCurrentPokemon === (pokemonRepository.getAll().length - 1)) {
+    } else if (
+      indexOfCurrentPokemon ===
+      pokemonRepository.getAll().length - 1
+    ) {
       modalNextButton.css('visibility', 'hidden');
     } else {
-      [modalPreviousButton, modalNextButton].forEach(function (button) {
+      [modalPreviousButton, modalNextButton].forEach(function(button) {
         if (button.attr('style')) {
           button.removeAttr('style');
         }
@@ -55,12 +58,12 @@ const modal = (function () {
 
     const types = $('<ul></ul>');
     types.addClass('modal-property');
-    pokemon.types.forEach(function (value) {
+    pokemon.types.forEach(function(value) {
       const type = $('<li></li>');
       type.addClass('modal-property__type');
       type.text(value);
       types.append(type);
-    })
+    });
 
     return [height, types];
   }
@@ -91,7 +94,7 @@ const modal = (function () {
   modalContainer.on('hidden.bs.modal', removeModalContent);
 
   // Event listeners for navigation
-  [modalPreviousButton, modalNextButton].forEach(function (button) {
+  [modalPreviousButton, modalNextButton].forEach(function(button) {
     button.click(navigateModal);
   });
 
@@ -101,7 +104,7 @@ const modal = (function () {
 })();
 
 // Setting up a dataset in an IIFE
-const pokemonRepository = (function (modalElement) {
+const pokemonRepository = (function(modalElement) {
   let pokemonList = [];
   const apiURL = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -115,17 +118,21 @@ const pokemonRepository = (function (modalElement) {
       // Further check if the number and types of object keys are right
       const rightKeys = ['name', 'height', 'types', 'detailsUrl'];
       const itemNumberOfKeys = Object.keys(item).length;
-      const itemHasRightKeys = Object.keys(item).every( function (key) {
+      const itemHasRightKeys = Object.keys(item).every(function(key) {
         return rightKeys.includes(key);
-      })
+      });
 
       if (itemNumberOfKeys <= rightKeys.length && itemHasRightKeys) {
         pokemonList.push(item);
       } else {
-        console.log("The item you are trying to add has an invalid number and/or invalid types of keys.")
+        console.log(
+          'The item you are trying to add has an invalid number and/or invalid types of keys.'
+        );
       }
     } else {
-      console.log("The item you are trying to add is not of the required type (object).")
+      console.log(
+        'The item you are trying to add is not of the required type (object).'
+      );
     }
   }
 
@@ -156,49 +163,55 @@ const pokemonRepository = (function (modalElement) {
 
   function showDetails(pokemon) {
     if (modalElement && modalElement.showModal) {
-      loadDetails(pokemon).then(function () {
+      loadDetails(pokemon).then(function() {
         modalElement.showModal(pokemon);
       });
     }
   }
 
   function handleEvents(element, pokemon) {
-    element.on('click', function () {
+    element.on('click', function() {
       showDetails(pokemon);
     });
   }
 
   function loadList() {
-    return fetch(apiURL).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      json.results.forEach(function (item) {
-        const pokemon = {
-          name: item.name,
-          detailsUrl: item.url
-        };
-        add(pokemon);
+    return fetch(apiURL)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        json.results.forEach(function(item) {
+          const pokemon = {
+            name: item.name,
+            detailsUrl: item.url
+          };
+          add(pokemon);
+        });
+      })
+      .catch(function(e) {
+        console.error(e);
       });
-    }).catch(function (e) {
-      console.error(e);
-    });
   }
 
   function loadDetails(item) {
     const url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      // Types are stored as object, convert to array with type names
-      item.types = details.types.map(function (value) {
-        return value["type"]["name"];
+    return fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(details) {
+        // Now we add the details to the item
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        // Types are stored as object, convert to array with type names
+        item.types = details.types.map(function(value) {
+          return value['type']['name'];
+        });
+      })
+      .catch(function(e) {
+        console.error(e);
       });
-    }).catch(function (e) {
-      console.error(e);
-    });
   }
 
   function getIndex(pokemon) {
@@ -217,7 +230,7 @@ const pokemonRepository = (function (modalElement) {
 // Load data and display it in list
 pokemonRepository.loadList().then(function() {
   // Now the data is loaded!
-  pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
 });
@@ -228,7 +241,7 @@ $('#search-form').submit(function() {
   const searchTerm = $('#search-term').val();
 
   // Filter all pokemon that include search term
-  const results = pokemonRepository.getAll().filter(function (pokemon) {
+  const results = pokemonRepository.getAll().filter(function(pokemon) {
     return pokemon.name.includes(searchTerm);
   });
 
@@ -236,12 +249,12 @@ $('#search-form').submit(function() {
   $('.pokemon-list').empty();
 
   // Add all pokemon from results
-  results.forEach(function (result) {
+  results.forEach(function(result) {
     pokemonRepository.addListItem(result);
   });
 
   // Mark search term in results
-  $('.pokemon-list__item').each( function () {
+  $('.pokemon-list__item').each(function() {
     $(this).mark(searchTerm);
   });
 
