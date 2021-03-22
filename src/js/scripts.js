@@ -54,7 +54,7 @@ const modal = (function() {
   function addModalProperties(pokemon) {
     const height = $('<p></p>');
     height.addClass('modal-property');
-    height.text(`Height: ${pokemon.height}`);
+    height.text('Height: '.concat(pokemon.height));
 
     const types = $('<ul></ul>');
     types.addClass('modal-property');
@@ -119,7 +119,7 @@ const pokemonRepository = (function(modalElement) {
       const rightKeys = ['name', 'height', 'types', 'detailsUrl'];
       const itemNumberOfKeys = Object.keys(item).length;
       const itemHasRightKeys = Object.keys(item).every(function(key) {
-        return rightKeys.includes(key);
+        return rightKeys.indexOf(key) + 1;
       });
 
       if (itemNumberOfKeys <= rightKeys.length && itemHasRightKeys) {

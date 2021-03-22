@@ -122,6 +122,10 @@ input.form-control:focus {
   border: none;
 }
 
+.modal-header {
+  -ms-flex-direction: row-reverse;
+}
+
 .modal__button {
   background: none;
   outline: none;
