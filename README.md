@@ -7,10 +7,10 @@ The simple Pokédex JS App pulls data about Pokémon from a public API and displ
 #### Table of Contents
 
 - [Objective](#Objective)
-- [User Goals](#UserGoals)
-- [Key Features](#KeyFeatures)
+- [User Goals](#User-Goals)
+- [Key Features](#Key-Features)
 - [Stack](#Stack)
-- [How to Use](#HowtoUse)
+- [How to Use](#How-to-Use)
 
 ## Objective
 This project is intended as a first application of basic JS knowledge. The goal was to build a complete, fully functioning JS web application that uses data from an external data source. The selected theme is a display of different Pokémon using a public Pokémon API.
